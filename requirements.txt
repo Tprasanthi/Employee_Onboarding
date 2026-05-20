@@ -1,0 +1,13 @@
+langgraph
+langchain
+langchain-openai
+qdrant-client
+boto3
+fastapi
+uvicorn
+pydantic
+python-dotenv
+opentelemetry-api
+opentelemetry-sdk
+langsmith
+pytest

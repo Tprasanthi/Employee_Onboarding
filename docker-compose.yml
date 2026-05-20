@@ -1,0 +1,66 @@
+version: '3.9'
+
+services:
+
+  onboarding-orchestrator:
+
+    build: .
+
+    container_name: onboarding-orchestrator
+
+    ports:
+      - "8000:8000"
+
+    env_file:
+      - .env
+
+    depends_on:
+      - postgres
+      - qdrant
+
+    volumes:
+      - .:/app
+
+    restart: always
+
+
+  postgres:
+
+    image: postgres:15
+
+    container_name: onboarding-postgres
+
+    environment:
+      POSTGRES_DB: onboarding
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    restart: always
+
+
+  qdrant:
+
+    image: qdrant/qdrant
+
+    container_name: onboarding-qdrant
+
+    ports:
+      - "6333:6333"
+
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+    restart: always
+
+
+volumes:
+
+  postgres_data:
+
+  qdrant_data:
